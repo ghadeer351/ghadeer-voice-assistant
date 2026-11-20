@@ -50,6 +50,14 @@ class SpeechInput:
                     parts.append(final)
         return " ".join(parts).strip()
 
+    def flush(self):
+        """Discard queued audio, such as the assistant's own spoken prompt."""
+        while not self.audio_queue.empty():
+            try:
+                self.audio_queue.get_nowait()
+            except queue.Empty:
+                break
+
     def stream(self):
         """Yield microphone chunks for always-on wake phrase detection."""
         with sd.RawInputStream(
