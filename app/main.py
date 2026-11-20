@@ -82,6 +82,7 @@ def main():
                 continue
 
             speak("تفضل، شو بدك؟", settings.get("speak_responses", True))
+            audio.flush()  # Do not transcribe the assistant's own prompt.
             command = capture_from_stream(
                 chunks, model, settings.get("command_timeout_seconds", 7)
             )
@@ -93,6 +94,7 @@ def main():
             action = match_command(command)
             if action == "lock":
                 speak("متأكد بدك تقفل الشاشة؟ قل نعم للتأكيد.", settings.get("speak_responses", True))
+                audio.flush()
                 confirmation = capture_from_stream(chunks, model, 4).lower()
                 if "نعم" not in confirmation and "yes" not in confirmation:
                     speak("ألغيت العملية.", settings.get("speak_responses", True))
