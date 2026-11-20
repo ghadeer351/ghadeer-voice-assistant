@@ -13,10 +13,11 @@ APP_CANDIDATES = {
 }
 
 URLS = {
-    "youtube": "https://www.youtube.com",
-    "google": "https://www.google.com",
-    "github": "https://github.com",
+    "open_youtube": "https://www.youtube.com",
+    "open_google": "https://www.google.com",
+    "open_github": "https://github.com",
 }
+
 
 def _launch(candidates):
     for candidate in candidates:
@@ -26,9 +27,12 @@ def _launch(candidates):
             return True
     return False
 
+
 def execute(action, argument=None):
     if isinstance(action, tuple) and action[0] == "open_url":
         return webbrowser.open(action[1]), "عم افتح الرابط."
+    if action in URLS:
+        return webbrowser.open(URLS[action]), "عم افتح الموقع."
     if action in APP_CANDIDATES:
         ok = _launch(APP_CANDIDATES[action])
         return ok, "تم." if ok else "ما لقيت التطبيق مثبت عندك."
@@ -52,13 +56,17 @@ def execute(action, argument=None):
         return _run_named(["gnome-screenshot"])
     if action == "lock":
         return _run_named(["loginctl", "lock-session"])
+    if action == "help":
+        return True, "بقدر افتح التطبيقات والمواقع، اتحكم بالصوت، افتح التنزيلات، وخد لقطة شاشة."
     return False, "ما فهمت الأمر أو أنه غير مدعوم حالياً."
+
 
 def _run_wpctl(args):
     if not shutil.which("wpctl"):
         return False, "أداة التحكم بالصوت wpctl غير متوفرة."
     subprocess.Popen(["wpctl", *args], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return True, "تم."
+
 
 def _run_named(args):
     if not shutil.which(args[0]):
