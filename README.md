@@ -31,7 +31,7 @@ Commands are intentionally limited. More actions can be added through the comman
 - About 350 MB free for the recommended Arabic Vosk model, plus Python dependencies.
 - Packages: `python3-venv`, `python3-pip`, `portaudio19-dev`, `espeak-ng`, `alsa-utils`, `curl`, `unzip`.
 
-The default Arabic model is `vosk-model-ar-mgb2-0.4` (approximately 318 MB). It is not a purpose-built wake-word model and may not reliably recognize every Syrian accent or the phrase in noisy rooms. If it performs poorly, use the manual trigger mode described below rather than assuming the wake word works.
+The default Arabic model is `vosk-model-ar-mgb2-0.4` (approximately 318 MB). It is not a purpose-built wake-word model and may not reliably recognize every Syrian accent or the phrase in noisy rooms. If it performs poorly, do not enable autostart yet; use the microphone test to diagnose input and recognition first. A keyboard-triggered fallback is planned for a later milestone.
 
 ## Install
 
