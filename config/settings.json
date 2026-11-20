@@ -1,0 +1,10 @@
+{
+  "wake_phrases": ["يا مساعد", "يا مساعدي", "hey assistant", "hello assistant"],
+  "model_path": "models/vosk-model-ar-mgb2-0.4",
+  "sample_rate": 16000,
+  "input_device": null,
+  "command_timeout_seconds": 7,
+  "wake_timeout_seconds": 2,
+  "language": "ar",
+  "speak_responses": true
+}
